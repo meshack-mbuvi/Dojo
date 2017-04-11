@@ -1,9 +1,9 @@
 """
 Usage:
     Dojo create_room <room_type> <room_name>...
-    Dojo add_person <name> <person_type> [accom='N']
+    Dojo add_person <name> <person_type> 
     Dojo (-i | --interactive)
-    Dojo (-h | --help)
+    Dojo -h | --help
 Options:
     -o, --output  Save to a txt file
     -i, --interactive  Interactive Mode
@@ -77,7 +77,7 @@ class MyInteractive (cmd.Cmd):
     def add_person(name,person_type,accom='N'):
         """if person is Fellow s/he can allocated both an office and livingspace"""
         person.add_person(name,person_type)
-        """Usage: add_person <room_type> <room_name> [accom='N']"""
+        """Usage: add_person <room_type> <room_name>"""
 
 
 
@@ -91,9 +91,10 @@ class MyInteractive (cmd.Cmd):
 
 opt = docopt(__doc__, sys.argv[1:])
 arguments = docopt(__doc__)
-#print(arguments)
+print(arguments)
 
 if opt['--interactive']:
     MyInteractive().cmdloop()
-
+elif opt['-h'] or opt['--help']:
+    pass
 print(opt)

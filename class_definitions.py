@@ -23,7 +23,8 @@ class Office(Room):
 	
 class LivingSpace(Room):
 	"""docstring for LivingSpace"""
-	def __init__(self):
+	def __init__(self,name,room_type):
+		Room.__init__(self,name,room_type)
 		self.max_occupants=4
 
 

@@ -13,16 +13,18 @@ class Implementation():
 	available_offices=[]
 
 	def create_room(self,name,room_type):
+
 		if room_type.lower()=="office":
 			room=Office(name,room_type.lower())
 			Implementation.all_rooms.append(room.name)
 			print ("An office called {} has been successfully created!".format(name))
 			return room
+
 		elif room_type.lower()=="livingspace":
 			room=LivingSpace(name,room_type.lower())
-			Implementation.all_rooms.all_append(self.room.name)
-			print ("A ")
-			return self.room
+			Implementation.all_rooms.append(room.name)
+			print ("A Living Space called {} has been successfully created!".format(name))
+			return room
 		else:
 			print ("Not a valid room")
 
