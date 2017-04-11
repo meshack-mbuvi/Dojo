@@ -27,10 +27,17 @@ class TestCreateRoom(unittest.TestCase):
 	def test_allocate_office_successfuly(self):
 		obj=Implementation()
 		mbuvi=obj.add_person("Mbuvi","Fellow")
-		obj.allocate_office("Mbuvi")
-		mbuvi_office=mbuvi.office_name
+		
+		allocations=obj.allocate_office("Mbuvi")
 		#No office exist so allocation cannot be done
-		self.assertEqual(mbuvi_office,"",msg="Mbuvi has to be allocated office")
+		self.assertEqual(allocations['office'],None,msg="Mbuvi has to be allocated office")
+
+	def test_allocate_livingspace_fails(self):
+		obj=Implementation()
+		josep=obj.add_person("Joseph","staff")
+		room=obj.create_room("White","Livingspace")
+		space=obj.allocate_livingspace(josep)
+		self.assertEqual(space,None,josep.livingspacename)
 
 
 

@@ -33,6 +33,7 @@ class Person():
 		self.name=name
 		self.persons=person_type
 		self.office_name=""
+		self.livingspacename=""
 
 	
 class Fellow(Person):
@@ -44,9 +45,9 @@ class Fellow(Person):
 	
 class Staff(Person):
 	def __init__(self,name,person_type):
-		self.person_type="Staff"
+		self.person_type="staff"
 		Person.__init__(self,name,self.person_type)
-		self.person_type="Staff"
+		self.livingspacename=None
 
 	
 
