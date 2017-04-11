@@ -5,7 +5,6 @@ usage:
 
 """
 from docopt import docopt
-from dojo import Dojo
 from allocation import Dojo,Room,Office,LivingSpace,Person
 """Instantiate the classes
 """

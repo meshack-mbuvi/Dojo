@@ -1,33 +1,27 @@
 import unittest
-from allocation import Room, Office,Person
+from class_implementation import Implementation
 
 
 class TestCreateRoom(unittest.TestCase):
 	"""docstring for inheritanceTests"""
-	
+		
 	def test_create_room_successfully(self):
-		room=Room()
-		initial_room_count=len(room.all_rooms)
-		blue_office=room.create_room("Office","Blue")
+		self.imple=Implementation()
+		self.imple.create_room("Blue","Office")
+		initial_room_count=len(self.imple.all_rooms)
+		blue_office=self.imple.create_room("Blue","Office")
 		self.assertTrue(blue_office)
-		new_room_count=len(room.all_rooms)
+		new_room_count=len(self.imple.all_rooms)
 		self.assertEqual(new_room_count-initial_room_count,1)
-	def test_add_person_successfully(self):
-		self.person=Person()
-		initial_person_count=len(self.person.persons)
-		person=self.person.add_person("name","Fellow")
-		self.assertTrue(person)
-		new_person_count=len(person.persons)
-		self.assertEqual(new_person_count-initial_person_count,1)
-class TesstCreateOffice(unittest.TestCase):
-	def test_office_ia_a_room(self):
-		self.office=Office()
-		self.room=Room()
-		self.assertTrue(isinstance(self.office,Room),msg="Office should be a object of room")
 
-	def test_office_allocation(self):
-		self.office=Office()
-		self.assertEqual(self.office.allocate_room("blue"),"Office allocated successfully")
+	def test_add_person_successfully(self):
+		self.imple=Implementation()
+		initial_person_count=len(self.imple.all_people)
+		self.person=self.imple.add_person("name","Fellow")
+		self.assertTrue(self.person)
+		new_person_count=len(self.imple.all_people)
+		self.assertEqual(new_person_count-initial_person_count,1)
+
 
 
 		
