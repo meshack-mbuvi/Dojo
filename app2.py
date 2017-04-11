@@ -7,8 +7,8 @@ def run():
 	ob.create_room('Black','Office')
 	ob.create_room('Black','livingspace')
 	#add several people
-	ob.add_person("Meshack","Fellow")
-	ob.add_person("mbuvi","Fellow")
-	ob.add_person("Musyoka","Fellow")
+	ob.add_person("Meshack","mbuvi","Fellow")
+	ob.add_person("mbuvi","meshack","Fellow")
+	ob.add_person("Josephat","Musyoka","Fellow")
 
 run()

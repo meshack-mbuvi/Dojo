@@ -56,15 +56,15 @@ class Implementation():
 		if len(available_offices)!=0:
 			office=available_offices.pop()
 			#Now assign the person this office
-			office.list_of_occupants.append(person_object.name)
+			office.list_of_occupants.append(person_object.firstname)
 			#set the attribute office_name of object person to the name of the asigned office
 			person_object.office_name=office.name
 
-			print("{} has been allocated the office {}".format(person_object.name,office.name))
+			print("{} has been allocated the office {}".format(person_object.firstname,office.name))
 			allocations={"office":office.name}
 			return allocations
 		else:
-			print("{} has not been allocated any office!".format(self.person.name))
+			print("{} has not been allocated any office!".format(self.person.firstname))
 			return {'office':None}
 			
 
@@ -108,13 +108,13 @@ class Implementation():
 			
 
 
-	def add_person(self,name,person_type,acco="N"):
+	def add_person(self,firstname,secondname,person_type,acco="N"):
 		
 		if person_type.lower()=="fellow":
-			self.person=Fellow(name,person_type)
+			self.person=Fellow(firstname,secondname,person_type)
 			self.all_people.append(self.person)
 
-			print("{} has been successfully added.".format(self.person.name))
+			print("{} {} has been successfully added.".format(self.person.firstname,self.person.firstname))
 			self.allocate_office(self.person)
 			##Allocate livingspace if fellow and chose livingspace option Y
 			if acco=='Y':
@@ -123,7 +123,7 @@ class Implementation():
 			return self.person
 
 		elif person_type.lower()=="staff":
-			self.person=Staff(name,person_type)
+			self.person=Staff(firstname,secondname,person_type)
 			self.all_people.append(self.person)
 			self.allocate_office(self.person)
 			return self.person

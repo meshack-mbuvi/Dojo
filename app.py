@@ -1,7 +1,7 @@
 """
 Usage:
     Dojo create_room <room_type> <room_name>...
-    Dojo add_person <name> <person_type> [acco]
+    Dojo add_person <firstname> <secondname> <person_type> [wants_accomodation]
     Dojo (-i | --interactive)
     Dojo -h | --help
 Options:
@@ -74,10 +74,16 @@ class MyInteractive (cmd.Cmd):
     def do_add_person(self,args):
         """if person is Fellow s/he can allocated both an office and livingspace"""
         #person.add_person(name,person_type)
-        """Usage: add_person <name> <person_type> [acco]"""
+        """Usage: add_person <name> <person_type> [wants_accomodation]"""
+        firstname=args['<firstname>']
+        secondname = args['<lastname>']
+        person_type = args['<person_type>']
+        acco = args['<wants_accomodation>']
+
+        print (firstname)
 
         ob=Implementation()
-        ob.add_person(args['<name>'],args['<person_type>'],args['acco'])
+        ob.add_person(firstname,secondname,acco)
 
 
 

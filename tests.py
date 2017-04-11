@@ -19,14 +19,14 @@ class TestCreateRoom(unittest.TestCase):
 	def test_add_person_successfully(self):
 		self.imple=Implementation()
 		initial_person_count=len(self.imple.all_people)
-		self.person=self.imple.add_person("name","Fellow")
+		self.person=self.imple.add_person("meshack","mbuvi","Fellow")
 		self.assertTrue(self.person)
 		new_person_count=len(self.imple.all_people)
 		self.assertEqual(new_person_count-initial_person_count,1)
 
 	def test_allocate_office_successfuly(self):
 		obj=Implementation()
-		mbuvi=obj.add_person("Mbuvi","Fellow")
+		mbuvi=obj.add_person("meshack","Mbuvi","Fellow")
 		
 		allocations=obj.allocate_office("Mbuvi")
 		#No office exist so allocation cannot be done
@@ -34,12 +34,17 @@ class TestCreateRoom(unittest.TestCase):
 
 	def test_allocate_livingspace_fails(self):
 		obj=Implementation()
-		josep=obj.add_person("Joseph","staff")
+		josep=obj.add_person("Joseph","mbenge","staff")
 		room=obj.create_room("White","Livingspace")
 		space=obj.allocate_livingspace(josep)
 		self.assertEqual(space,None,josep.livingspacename)
 
-
+class TestCheckRooms(unittest.TestCase):
+	"""docstring for TestCheckRooms"""
+	def __init__(self, arg):
+		super(TestCheckRooms, self).__init__()
+		self.arg = arg
+		
 
 		
 unittest.main()

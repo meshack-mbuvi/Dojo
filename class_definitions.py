@@ -29,24 +29,25 @@ class LivingSpace(Room):
 
 
 class Person():
-	def __init__(self,name,person_type):
-		self.name=name
+	def __init__(self,firstname,secondname,person_type):
+		self.firstname=firstname
+		self.secondname=secondname
 		self.persons=person_type
 		self.office_name=""
 		self.livingspacename=""
 
 	
 class Fellow(Person):
-	def __init__(self,name,person_type):
+	def __init__(self,firstname,secondname,person_type):
 		self.person_type="Fellow"
-		Person.__init__(self,name,self.person_type)
+		Person.__init__(self,firstname,secondname,self.person_type)
 		self.livingspaceNumber=""
 		
 	
 class Staff(Person):
-	def __init__(self,name,person_type):
+	def __init__(self,firstname,secondname,person_type):
 		self.person_type="staff"
-		Person.__init__(self,name,self.person_type)
+		Person.__init__(self,firstname,secondname,self.person_type)
 		self.livingspacename=None
 
 	
