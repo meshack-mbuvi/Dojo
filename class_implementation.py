@@ -116,6 +116,9 @@ class Implementation():
 
 			print("{} has been successfully added.".format(self.person.name))
 			self.allocate_office(self.person)
+			##Allocate livingspace if fellow and chose livingspace option Y
+			if acco=='Y':
+				allocate_livingspace(self,person_object)
 
 			return self.person
 

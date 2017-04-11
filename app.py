@@ -1,7 +1,7 @@
 """
 Usage:
     Dojo create_room <room_type> <room_name>...
-    Dojo add_person <name> <person_type> 
+    Dojo add_person <name> <person_type> [acco]
     Dojo (-i | --interactive)
     Dojo -h | --help
 Options:
@@ -67,18 +67,17 @@ class MyInteractive (cmd.Cmd):
             ob=Implementation()
             value=ob.create_room(args['<room_name>'][0],args['<room_type>'])
 
-
-
-
         print(args['<room_type>'])
         print(args['<room_name>'])
 
     @docopt_cmd
-    def add_person(name,person_type,accom='N'):
+    def do_add_person(self,args):
         """if person is Fellow s/he can allocated both an office and livingspace"""
-        person.add_person(name,person_type)
-        """Usage: add_person <room_type> <room_name>"""
+        #person.add_person(name,person_type)
+        """Usage: add_person <name> <person_type> [acco]"""
 
+        ob=Implementation()
+        ob.add_person(args['<name>'],args['<person_type>'],args['acco'])
 
 
 
@@ -91,7 +90,7 @@ class MyInteractive (cmd.Cmd):
 
 opt = docopt(__doc__, sys.argv[1:])
 arguments = docopt(__doc__)
-print(arguments)
+#print(arguments)
 
 if opt['--interactive']:
     MyInteractive().cmdloop()
