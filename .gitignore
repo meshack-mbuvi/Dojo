@@ -1,1 +1,8 @@
+#files to be ignored
 *.pyc
+/bin
+/include
+/local
+/lib
+pip-selfcheck.json
+requirements.txt

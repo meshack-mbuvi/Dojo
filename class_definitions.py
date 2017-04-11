@@ -10,7 +10,7 @@ class Room(Dojo):
 	def __init__(self,name,room_type):
 		self.list_of_occupants=[]
 		self.name=name
-		self.type=room_type
+		self.room_type=room_type
 
 	
 
@@ -32,7 +32,7 @@ class Person():
 	def __init__(self,name,person_type):
 		self.name=name
 		self.persons=person_type
-		self.office_number=""
+		self.office_name=""
 
 	
 class Fellow(Person):
