@@ -50,7 +50,7 @@ class TestCheckRooms(unittest.TestCase):
 		class_object=Implementation()
 		class_object.add_person("Josephat","Musyoka","Fellow")
 		#get room allocated to Joseph
-		room_name=
+		room_name=class_object.all_people
 		all_rooms=class_object.print_allocations(self)
 		self.assertFalse(all_rooms,"")
 
