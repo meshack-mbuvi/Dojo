@@ -156,15 +156,13 @@ class Implementation():
 
 	def print_allocations(self,file=""):
 		"""loop over the rooms list_of_occupants"""
-		self.room_names=[]
-
-		print(self.all_rooms)
+		room_names=[]
 		for index in range(0,len(self.all_rooms)):
-			self.room_names.append(self.all_rooms[index].room_name)
+			room_names.append(self.all_rooms[index].room_name)
 
-		print(self.room_names)
+		print(room_names)
 
-		while len(self.room_names)!=0:
+		while len(room_names)!=0:
 			for person_object in self.all_people:
 				pass
 
