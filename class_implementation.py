@@ -14,31 +14,31 @@ class Implementation():
 	all_people=[]
 	available_offices=[]
 
-	def create_room(self,name,room_type):
+	def create_room(self,room_name,room_type):
 
 		#create a list of names in existence so far
 		existing_rooms=[]
 		for index in range(0,len(self.all_rooms)):
-			existing_rooms.append(self.all_rooms[index].name)
-		if name in existing_rooms:
+			existing_rooms.append(self.all_rooms[index].room_name)
+		if room_name in existing_rooms:
 			print("Room name aleady taken")
 			return False
 
 
 		else:
 			if room_type.lower()=="office":
-				self.room=Office(name,room_type.lower())
+				self.room=Office(room_name,room_type.lower())
 				self.all_rooms.append(self.room)
-				print ("An office called {} has been successfully created!".format(name))
+				print ("An office called {} has been successfully created!".format(room_name))
 				return self.room
 
 			elif room_type.lower()=="livingspace":
-				self.room=LivingSpace(name,room_type.lower())
+				self.room=LivingSpace(room_name,room_type.lower())
 				"""
 				Be careful not to save the name of an office;rather save the object since you can get its attributes
 				NB:name is a string """
 				self.all_rooms.append(self.room)
-				print ("A Living Space called {} has been successfully created!".format(name))
+				print ("A Living Space called {} has been successfully created!".format(room_name))
 				return self.room
 			else:
 				return ("Not a valid room")
@@ -55,25 +55,25 @@ class Implementation():
 		return:
 		    dictionary object for the purpose of testcases  
 		"""
-		rooms=self.all_rooms
+		available_rooms=self.all_rooms
 		##create a list of objects whose type is office and have an empty space
-		available_offices=[room for room in rooms if room.room_type=='office' and len(room.list_of_occupants)<6]
+		available_offices=[room_object for room_object in available_rooms if room_object.room_type=='office' and len(room_object.list_of_occupants)<6]
 		
 
 		##randomize the list first and get the last object in it
 		##NB:You can decide on whether to get the last or the first object
 		random.shuffle(available_offices)
 		if len(available_offices)!=0:
-			office=available_offices.pop()
+			office_to_allocate=available_offices.pop()
 
 			#Now assign the person this office
-			office.list_of_occupants.append(person_object)
+			office_to_allocate.list_of_occupants.append(person_object)
 			#print rooms
 			#set the attribute office_name of object person to the name of the asigned office
-			person_object.office_name=office.name
+			person_object.office_name=office_to_allocate.room_name
 
-			print("{} {} has been allocated the office {}".format(person_object.firstname,person_object.secondname,office.name))
-			allocations={"office":office.name}
+			print("{} {} has been allocated the office {}".format(person_object.firstname,person_object.secondname,office_to_allocate.room_name))
+			allocations={"office":office_to_allocate.room_name}
 			return allocations
 		else:
 			print("{} {} has not been allocated any office!".format(self.person.firstname,person_object.secondname))
@@ -95,9 +95,9 @@ class Implementation():
 		"""
 		#Let's check whether the person can be allocated livingspace
 		if person_object.person_type.lower()!='staff':
-			rooms=self.all_rooms
+			available_rooms=self.all_rooms
 			##create a list of objects whose type is office and have an empty space
-			available_living_spaces=[room for room in rooms if room.room_type=='livingspace' and len(room.list_of_occupants)<4]
+			available_living_spaces=[room_object for room_object in available_rooms if room_object.room_type=='livingspace' and len(room_object.list_of_occupants)<4]
 
 			##randomize the list first and get the last object in it
 			##NB:You can decide on whether to get the last or the first object
@@ -117,7 +117,7 @@ class Implementation():
 			
 
 
-	def add_person(self,firstname,secondname,person_type,acco="N"):
+	def add_person(self,firstname,secondname,person_type,wants_accommodation="N"):
 		
 		if person_type.lower()=="fellow":
 			self.person=Fellow(firstname,secondname,person_type)
@@ -126,7 +126,7 @@ class Implementation():
 			print("{} {} has been successfully added.".format(self.person.firstname,self.person.firstname))
 			self.allocate_office(self.person)
 			##Allocate livingspace if fellow and chose livingspace option Y
-			if acco.lower()=='y':
+			if wants_accommodation.lower()=='y':
 				self.allocate_livingspace(self.person)
 
 			return self.person
@@ -140,20 +140,22 @@ class Implementation():
 		else:
 			return "Not valid person"
 
-	def print_room(self,name):
+	def print_room(self,room_name):
 		"""
 		This function prints each room together with names of its occupants
 
 		"""
 		##single out the particular room from self.all_rooms
-		self.temp_room=[room for room in self.all_rooms if room.name==name]
-		size=len(self.temp_room[0].list_of_occupants)
-		names=[]
+		self.room_to_list_its_occupants=[room_object for room_object in self.all_rooms if room_object.room_name==room_name]
+		size=len(self.room_to_list_its_occupants[0].list_of_occupants)
+		names_of_occupants=[]
 		for index in range(0,size):
 			#print(self.temp_room[0].list_of_occupants[index].firstname,self.temp_room[0].list_of_occupants[index].secondname)
-			names.extend(['{} {}'.format(self.temp_room[0].list_of_occupants[index].firstname,self.temp_room[0].list_of_occupants[index].secondname)])
+			names_of_occupants.extend(['{} {}'.format(self.room_to_list_its_occupants[0].list_of_occupants[index].firstname,self.room_to_list_its_occupants[0].list_of_occupants[index].secondname)])
 
+			print(names_of_occupants)
+		return names_of_occupants
 
-		print(names)
-		return names
+	def print_allocations(self,file=""):
+		pass
 

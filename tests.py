@@ -5,20 +5,20 @@ from class_implementation import Implementation
 class TestCreateRoom(unittest.TestCase):
 	"""docstring for inheritanceTests"""
 	def test_create_room_successfully(self):
-		self.imple=Implementation()
-		self.imple.create_room("White","Office")
-		initial_room_count=len(self.imple.all_rooms)
-		office=self.imple.create_room("Red","Livingspace")
+		self.class_object=Implementation()
+		self.class_object.create_room("White","Office")
+		initial_room_count=len(self.class_object.all_rooms)
+		office=self.class_object.create_room("Red","Livingspace")
 		self.assertTrue(office)
-		new_room_count=len(self.imple.all_rooms)
+		new_room_count=len(self.class_object.all_rooms)
 		self.assertEqual(new_room_count-initial_room_count,1)
 
 	def test_add_person_successfully(self):
-		self.imple=Implementation()
-		initial_person_count=len(self.imple.all_people)
-		self.person=self.imple.add_person("meshack","mbuvi","Fellow")
+		self.class_object=Implementation()
+		initial_person_count=len(self.class_object.all_people)
+		self.person=self.class_object.add_person("meshack","mbuvi","Fellow")
 		self.assertTrue(self.person)
-		new_person_count=len(self.imple.all_people)
+		new_person_count=len(self.class_object.all_people)
 		self.assertEqual(new_person_count-initial_person_count,1)
 
 	def test_allocate_office_successfuly(self):
@@ -47,8 +47,8 @@ class TestCheckRooms(unittest.TestCase):
 		self.assertEqual(occupants,['Meshack mbuvi', 'Josephat Musyoka', 'Joseph mbenge'],msg='Should print the names of people allocated to white office')
 		print occupants
 		
-		# print(self.obj.all_rooms[0].list_of_occupants)
-		# print("Done")
+	def test_prints_allocations(self):
+		pass
 		
 
 		
