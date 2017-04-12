@@ -47,10 +47,12 @@ class TestCheckRooms(unittest.TestCase):
 		print occupants
 		
 	def test_print_allocations(self):
-		self.class_object=Implementation()
-		self.class_object.add_person("Josephat","Musyoka","Fellow")
-		self.all_rooms=self.class_object.print_allocations(self)
-		#self.assertTrue(self.all_rooms,['Josephat Musyoka'],msg='Should print room_name and its occupants')
+		class_object=Implementation()
+		class_object.add_person("Josephat","Musyoka","Fellow")
+		#get room allocated to Joseph
+		room_name=
+		all_rooms=class_object.print_allocations(self)
+		self.assertFalse(all_rooms,"")
 
 		
 
