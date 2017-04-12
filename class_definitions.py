@@ -8,6 +8,7 @@ class Room(Dojo):
 	"""docstring"""
 
 	def __init__(self,name,room_type):
+		Dojo.__init__(self)
 		self.list_of_occupants=[]
 		self.name=name
 		self.room_type=room_type
@@ -34,7 +35,6 @@ class Person():
 		self.secondname=secondname
 		self.persons=person_type
 		self.office_name=""
-		self.livingspacename=""
 
 	
 class Fellow(Person):
@@ -48,7 +48,6 @@ class Staff(Person):
 	def __init__(self,firstname,secondname,person_type):
 		self.person_type="staff"
 		Person.__init__(self,firstname,secondname,self.person_type)
-		self.livingspacename=None
 
 	
 

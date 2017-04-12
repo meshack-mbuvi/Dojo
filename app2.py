@@ -10,6 +10,8 @@ def run():
 	ob.add_person("Meshack","mbuvi","Fellow")
 	ob.add_person("Josephat","Musyoka","Fellow")
 
+
+	#print names of people in given room 
 	ob.print_room("Black")
 
 run()
