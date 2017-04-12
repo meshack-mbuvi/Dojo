@@ -3,6 +3,7 @@ Usage:
     Dojo create_room <room_type> <room_name>...
     Dojo add_person <firstname> <lastname> <person_type> [<accommodation>]
     Dojo print_room <room_name>
+    Dojo print_allocations
     Dojo (-i | --interactive)
     Dojo -h | --help
 Options:
@@ -14,7 +15,7 @@ import sys, os
 import cmd
 
 from docopt import docopt, DocoptExit
-from class_controller import Implementation
+from implementation import Implementation
 
 
 def docopt_cmd(func):
@@ -58,9 +59,11 @@ class MyInteractive (cmd.Cmd):
     def do_create_room(self,args):
 
         """Usage: create_room <room_type> <room_name>..."""
+        implementation=Implementation()
+
         for room_name in args['<room_name>']:
-            class_object=Implementation()
-            created_rooms=class_object.create_room(room_name,args['<room_type>'])
+            implementation.create_room(room_name,args['<room_type>'])
+            
         
     @docopt_cmd
     def do_add_person(self,args):
@@ -71,16 +74,26 @@ class MyInteractive (cmd.Cmd):
         person_type = args['<person_type>']
         accommodation_option = args['<wants_accomodation>']
 
-        class_object=Implementation()
-        class_object.add_person(firstname,secondname,person_type,accommodation_option)
+        implementation=Implementation()
+
+        
+        implementation.add_person(firstname,secondname,person_type,accommodation_option)
 
     @docopt_cmd
     def do_print_room(self,args):
         #person.add_person(name,person_type)
         """Usage: print_room <room_name> """
-        
-        class_object=Implementation()
-        class_object.print_room(args['<room_name>'])
+        implementation=Implementation()
+
+        implementation.print_room(args['<room_name>'])
+
+    @docopt_cmd
+    def do_print_allocations(self,args):
+        #person.add_person(name,person_type)
+        """Usage: print_allocations """
+        implementation=Implementation()
+
+        implementation.print_allocations()
 
     def do_quit(self, args):
         """Quits out of Interactive Mode."""
