@@ -27,19 +27,19 @@ class Implementation():
 
 		else:
 			if room_type.lower()=="office":
-				room=Office(name,room_type.lower())
-				self.all_rooms.append(room)
+				self.room=Office(name,room_type.lower())
+				self.all_rooms.append(self.room)
 				print ("An office called {} has been successfully created!".format(name))
-				return room
+				return self.room
 
 			elif room_type.lower()=="livingspace":
-				room=LivingSpace(name,room_type.lower())
+				self.room=LivingSpace(name,room_type.lower())
 				"""
 				Be careful not to save the name of an office;rather save the object since you can get its attributes
 				NB:name is a string """
-				self.all_rooms.append(room)
+				self.all_rooms.append(self.room)
 				print ("A Living Space called {} has been successfully created!".format(name))
-				return room
+				return self.room
 			else:
 				return ("Not a valid room")
 
@@ -106,10 +106,10 @@ class Implementation():
 			if len(available_living_spaces)!=0:
 				livingspace=available_living_spaces.pop()
 				#Now assign the person this office
-				livingspace.list_of_occupants.append(person_object.firstname)
+				livingspace.list_of_occupants.append(person_object)
 				#set the attribute office_name of object person to the name of the asigned office
 				person_object.livingspace=livingspace.name
-				print("{} has been allocated the livingspace {}".format(self.person.firstname,self.person.secondname))
+				print("{} {} has been allocated the livingspace {}".format(self.person.firstname,self.person.secondname,livingspace.name))
 				return livingspace.name
 			else:
 				print("{} {} has not been allocated any livingspace!".format(self.person.firstname,self.person.secondname))
@@ -126,8 +126,8 @@ class Implementation():
 			print("{} {} has been successfully added.".format(self.person.firstname,self.person.firstname))
 			self.allocate_office(self.person)
 			##Allocate livingspace if fellow and chose livingspace option Y
-			if acco=='Y':
-				allocate_livingspace(self,self.person)
+			if acco.lower()=='y':
+				self.allocate_livingspace(self.person)
 
 			return self.person
 
