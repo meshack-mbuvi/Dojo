@@ -1,14 +1,14 @@
 """
 Usage:
     Dojo create_room <room_type> <room_name>...
-    Dojo add_person <name> <person_type> [acco]
+    Dojo add_person <firstname> <lastname> <person_type> [<accomodation>]
+    Dojo print_room <room_name>
     Dojo (-i | --interactive)
     Dojo -h | --help
 Options:
     -o, --output  Save to a txt file
     -i, --interactive  Interactive Mode
     -h, --help  Show this screen and exit.
-    
 """
 import sys
 import cmd
@@ -72,15 +72,25 @@ class MyInteractive (cmd.Cmd):
 
     @docopt_cmd
     def do_add_person(self,args):
-        """if person is Fellow s/he can allocated both an office and livingspace"""
         #person.add_person(name,person_type)
-        """Usage: add_person <name> <person_type> [acco]"""
+        """Usage: add_person <firstname> <lastname> <person_type> [<accomodation>] """
+        firstname=args['<firstname>']
+        secondname = args['<lastname>']
+        person_type = args['<person_type>']
+        acco = args['<accomodation>']
 
         ob=Implementation()
-        ob.add_person(args['<name>'],args['<person_type>'],args['acco'])
+        ob.add_person(firstname,secondname,person_type,acco)
 
+    @docopt_cmd
+    def do_print_room(self,args):
+        #person.add_person(name,person_type)
+        """Usage: print_room <room_name> """
+        room_name=args['<room_name>']
+        
 
-
+        ob=Implementation()
+        ob.print_room(room_name)
 
     def do_quit(self, args):
         """Quits out of Interactive Mode."""
@@ -94,6 +104,5 @@ arguments = docopt(__doc__)
 
 if opt['--interactive']:
     MyInteractive().cmdloop()
-elif opt['-h'] or opt['--help']:
-    pass
+    
 print(opt)
