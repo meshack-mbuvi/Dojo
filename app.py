@@ -1,7 +1,7 @@
 """
 Usage:
     Dojo create_room <room_type> <room_name>...
-    Dojo add_person <firstname> <lastname> <person_type> [<accomodation>]
+    Dojo add_person <firstname> <lastname> <person_type> [<accommodation>]
     Dojo print_room <room_name>
     Dojo (-i | --interactive)
     Dojo -h | --help
@@ -10,11 +10,11 @@ Options:
     -i, --interactive  Interactive Mode
     -h, --help  Show this screen and exit.
 """
-import sys
+import sys, os
 import cmd
 
 from docopt import docopt, DocoptExit
-from class_implementation import Implementation
+from class_controller import Implementation
 
 
 def docopt_cmd(func):
@@ -58,39 +58,29 @@ class MyInteractive (cmd.Cmd):
     def do_create_room(self,args):
 
         """Usage: create_room <room_type> <room_name>..."""
-        names=[name for name in args['<room_name>']]
-        if len(args['<room_type>'])-1>1:
-            for name in args['<room_name>']:
-                ob=Implementation()
-                value=ob.create_room(name,args['<room_type>'])
-        else:
-            ob=Implementation()
-            value=ob.create_room(args['<room_name>'][0],args['<room_type>'])
-
-        print(args['<room_type>'])
-        print(args['<room_name>'])
-
+        for room_name in args['<room_name>']:
+            class_object=Implementation()
+            created_rooms=class_object.create_room(room_name,args['<room_type>'])
+        
     @docopt_cmd
     def do_add_person(self,args):
         #person.add_person(name,person_type)
-        """Usage: add_person <firstname> <lastname> <person_type> [<accomodation>] """
+        """Usage: add_person <firstname> <lastname> <person_type> [<wants_accomodation>] """
         firstname=args['<firstname>']
         secondname = args['<lastname>']
         person_type = args['<person_type>']
-        acco = args['<accomodation>']
+        accommodation_option = args['<wants_accomodation>']
 
-        ob=Implementation()
-        ob.add_person(firstname,secondname,person_type,acco)
+        class_object=Implementation()
+        class_object.add_person(firstname,secondname,person_type,accommodation_option)
 
     @docopt_cmd
     def do_print_room(self,args):
         #person.add_person(name,person_type)
         """Usage: print_room <room_name> """
-        room_name=args['<room_name>']
         
-
-        ob=Implementation()
-        ob.print_room(room_name)
+        class_object=Implementation()
+        class_object.print_room(args['<room_name>'])
 
     def do_quit(self, args):
         """Quits out of Interactive Mode."""

@@ -1,5 +1,5 @@
 import unittest
-from class_implementation import Implementation
+from class_controller import Implementation
 
 
 class TestCreateRoom(unittest.TestCase):
@@ -22,10 +22,10 @@ class TestCreateRoom(unittest.TestCase):
 		self.assertEqual(new_person_count-initial_person_count,1)
 
 	def test_allocate_office_successfuly(self):
-		obj=Implementation()
-		mbuvi=obj.add_person("meshack","Mbuvi","Fellow")
-		obj.create_room("Blue","Office")
-		allocations=obj.allocate_office(mbuvi)
+		class_object=Implementation()
+		mbuvi=class_object.add_person("meshack","Mbuvi","Fellow")
+		class_object.create_room("Blue","Office")
+		allocations=class_object.allocate_office(mbuvi)
 		#No office exist so allocation cannot be done
 		self.assertNotEqual(allocations['office'],None,msg="Mbuvi has to be allocated office")
 
@@ -34,21 +34,24 @@ class TestCheckRooms(unittest.TestCase):
 	"""docstring for TestCheckRooms"""
 	
 	def test_prints_room_name(self):
-		self.obj=Implementation()
+		self.class_object=Implementation()
 		#create room first
-		self.room=self.obj.create_room("White","office")
+		self.room=self.class_object.create_room("White","office")
 		#add several people
-		self.obj.add_person("Meshack","mbuvi","Fellow")
-		self.obj.add_person("Josephat","Musyoka","Fellow")
+		self.class_object.add_person("Meshack","mbuvi","Fellow")
+		self.class_object.add_person("Josephat","Musyoka","Fellow")
 		
-		self.josep=self.obj.add_person("Joseph","mbenge","staff")
-		
-		occupants=self.obj.print_room("White")
-		self.assertEqual(occupants,['Meshack mbuvi', 'Josephat Musyoka', 'Joseph mbenge'],msg='Should print the names of people allocated to white office')
+		occupants=self.class_object.print_room("White")
+		self.assertEqual(occupants,['Meshack mbuvi', 'Josephat Musyoka'],\
+			                       msg='Should print the names of people allocated to white office')
 		print occupants
 		
-	def test_prints_allocations(self):
-		pass
+	def test_print_allocations(self):
+		self.class_object=Implementation()
+		self.class_object.add_person("Josephat","Musyoka","Fellow")
+		self.all_rooms=self.class_object.print_allocations(self)
+		#self.assertTrue(self.all_rooms,['Josephat Musyoka'],msg='Should print room_name and its occupants')
+
 		
 
 		
