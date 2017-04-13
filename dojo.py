@@ -5,7 +5,10 @@ class Dojo(object):
 
 
 class Room(Dojo):
-	"""docstring"""
+	"""This is a parent class to Office and LivingSpace,
+	it contains attributes common to all other child classes
+
+	"""
 
 	def __init__(self,room_name,room_type):
 		Dojo.__init__(self)
@@ -16,7 +19,8 @@ class Room(Dojo):
 	
 
 class Office(Room):
-	"""Class Office inherits Room"""
+	"""Class Office inherits Room, this class has an extra attribute to set the 
+	capacity of each office object"""
 	def __init__(self,room_name,room_type):
 		Room.__init__(self,room_name,room_type)
 		self.max_occupants=6

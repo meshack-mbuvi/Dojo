@@ -3,7 +3,8 @@ Usage:
     Dojo create_room <room_type> <room_name>...
     Dojo add_person <firstname> <lastname> <person_type> [<accommodation>]
     Dojo print_room <room_name>
-    Dojo print_allocations
+    Dojo print_allocations [<filename>]
+    Dojo print_unallocations [<filename>]
     Dojo (-i | --interactive)
     Dojo -h | --help
 Options:
@@ -90,10 +91,11 @@ class MyInteractive (cmd.Cmd):
     @docopt_cmd
     def do_print_allocations(self,args):
         #person.add_person(name,person_type)
-        """Usage: print_allocations """
+        """Usage: print_allocations [<filename>] """
         implementation=Implementation()
+        filename_to_store_allocations=args['<filename>']
 
-        implementation.print_allocations()
+        implementation.print_allocations(filename_to_store_allocations)
 
     def do_quit(self, args):
         """Quits out of Interactive Mode."""
