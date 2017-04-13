@@ -3,51 +3,61 @@ from implementation import Implementation
 
 
 class TestCreateRoom(unittest.TestCase):
-	"""docstring for inheritanceTests"""
+	"""This"""
+	def setUp(self):
+		self.implementation=Implementation()
+
 	def test_create_room_successfully(self):
-		self.class_object=Implementation()
-		self.class_object.create_room("White","Office")
-		initial_room_count=len(self.class_object.all_rooms)
-		office=self.class_object.create_room("Red","Livingspace")
-		self.assertTrue(office)
-		new_room_count=len(self.class_object.all_rooms)
-		self.assertEqual(new_room_count-initial_room_count,1)
+		room_object_created=self.implementation.create_room("Red","Livingspace")
+		self.assertEqual(room_object_created.room_name,"Red",msg="Room names should match")
 
-	def test_add_person_successfully(self):
-		self.class_object=Implementation()
-		initial_person_count=len(self.class_object.all_people)
-		self.person=self.class_object.add_person("meshack","mbuvi","Fellow")
-		self.assertTrue(self.person)
-		new_person_count=len(self.class_object.all_people)
-		self.assertEqual(new_person_count-initial_person_count,1)
+	def test_create_existing_room_fails(self):
+		room_name_created=self.implementation.create_room("white","Livingspace")
+		self.assertTrue(room_name_created,False)
 
-	def test_allocate_office_successfuly(self):
-		class_object=Implementation()
-		mbuvi=class_object.add_person("meshack","Mbuvi","Fellow")
-		class_object.create_room("Blue","Office")
-		allocations=class_object.allocate_office(mbuvi)
-		#No office exist so allocation cannot be done
-		self.assertNotEqual(allocations['office'],None,msg="Mbuvi has to be allocated office")
+	def test_not_allocate_office_not_existing(self):
+		person=self.implementation.add_person("mutua","Mailu","Fellow")
+		self.assertEqual(person.office_name,"",msg="should not allocate office that does not exist")
 
+	def test_create_room_having_name_with_numbers_fails(self):
+		new_person=self.implementation.create_room("mbuvi123242","office")
+		self.assertEqual(new_person,"Not a valid room in our context")
 
-class TestCheckRooms(unittest.TestCase):
+class TestCheckPerson(unittest.TestCase):
 	"""docstring for TestCheckRooms"""
+	def setUp(self):
+		self.implementation=Implementation()
+		self.implementation.add_person("meshack","Mbuvi","Fellow")
+
 	
-	def test_prints_room_name(self):
-		self.class_object=Implementation()
-		#create room first
-		self.room=self.class_object.create_room("White","office")
-		#add several people
-		self.class_object.add_person("Meshack","mbuvi","Fellow")
-		self.class_object.add_person("Josephat","Musyoka","Fellow")
-		
-		occupants=self.class_object.print_room("White")
-		self.assertEqual(occupants,['Meshack mbuvi', 'Josephat Musyoka'],\
-			                       msg='Should print the names of people allocated to white office')
-		print occupants
-		
+	def test_add_person_succeeds(self):
+		new_person=self.implementation.add_person("jacob","mutua","fellow")
+		#create list with names of person object in the system
+		names_people_in_system=[]
+		for people in self.implementation.all_people:
+			#create a single name
+			temp_name=" ".join([people.firstname,people.secondname])
+			names_people_in_system.append(temp_name)
+		new_person_name=" ".join(['jacob','mutua'])
+		self.assertTrue([new_person_name in names_people_in_system],msg="should add person to system")
+
+	def test_add_person_not_fellow_or_staff_fails(self):
+		invalid_person=self.implementation.add_person("james","mutua","watchman")
+		self.assertEqual(invalid_person,"Not a valid person in our context")
+
+	def test_add_person_with_name_having_numbers_fails(self):
+		person_name_with_digits=self.implementation.add_person("mbuvi123242","meshack","fellow")
+		self.assertEqual(person_name_with_digits,"Not a valid person in our context")
+
 	def test_print_allocations(self):
 		pass
+
+	def test_add_existing_person_fails(self):
+		person=self.implementation.add_person("meshack","Mbuvi","Fellow")
+		self.assertEqual(person,"person already in the system")
+
+	
+
 
 		
 
