@@ -137,17 +137,18 @@ class Implementation():
 			#create a single name
 			temp_name=" ".join([people.firstname,people.secondname])
 			names_people_in_system.append(temp_name)
+			print names_people_in_system
 
 
 		#Ensure the person is not in system already
 		#formart name of person
-		new_person_name=" ".join([firstname,secondname])
+		new_person_name=" ".join([firstname.upper(),secondname.upper()])
 		if new_person_name in names_people_in_system:
 			print("person already in the system")
 			return "person already in the system" 
 
 
-		if person_type.lower()=="fellow":
+		elif person_type.lower()=="fellow":
 			person=Fellow(firstname.upper(),secondname.upper(),person_type.upper())
 
 			self.allocate_office(person)
